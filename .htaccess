@@ -1,0 +1,18 @@
+RewriteEngine on
+
+############################################
+## redirect http to https
+
+RewriteCond %{HTTPS} off
+RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+#┌─ REDIRECT to Coming Soon page
+
+RewriteCond %{REQUEST_URI} !^(\/coming_soon\/).*$
+RewriteCond %{HTTP_COOKIE} !bypass=ba30c0fb7c5231638405ea403e2eb4f6b140c424 [NC]
+RewriteRule .* https://%{HTTP_HOST}/coming_soon/ [R=302,L]
+
+
+#└─■  REDIRECT
+
+DirectoryIndex index.php
